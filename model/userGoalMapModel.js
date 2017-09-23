@@ -18,6 +18,34 @@ const userGoalMapModel = {
 		});
 	},
 
+	/* params = {user_id, start_date, end_date} */
+	findAllByUserIdAndDate: (params) => {
+		return new Promise((resolve, reject) => {
+			query(userGoalMapSql.selectAllByUserIdAndDate, [params.user_id,
+					params.start_date, params.end_date],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
+	/* params = {user_id, goal_id} */
+	findAllByUserIdAndGoalId: (params) => {
+		return new Promise((resolve, reject) => {
+			query(userGoalMapSql.selectAllByUserIdAndGoalId, [params.user_id,
+					params.goal_id],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
 	/* params = {shared, ugm_id} */
 	updateSharedById: (params) => {
 		return new Promise((resolve, reject) => {

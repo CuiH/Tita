@@ -65,21 +65,6 @@ eventRoute.post('/like',
 	}
 );
 
-eventRoute.get('/today',
-	tokenAuthentication,
-	bodyParser.urlencoded({extended: false}),
-	(req, res, next) => {
-		let params = req.body;
-		params.user_id = req.user.id;
-		eventService.getAllTodayEventsByUserId(params)
-			.then((results) => {
-				res.json({result: 'success', data: results});
-				console.log("a user queried all today events.");
-			})
-			.catch(err => next(err));
-	}
-);
-
 eventRoute.get('/date',
 	tokenAuthentication,
 	bodyParser.urlencoded({extended: false}),
@@ -108,6 +93,45 @@ eventRoute.get('/source',
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a user queried all future email events.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+eventRoute.get('/liked',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		let params = req.body;
+		params.user_id = req.user.id;
+		eventService.getAllLikedEventsByUserId(params)
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all liked events.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+eventRoute.get('/keyword',
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		eventService.getAllEventsByKeywordId({keyword_id: req.query.k})
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all events by keyword.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+eventRoute.get('/:id',
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		eventService.getEventById({id: req.params.id})
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried one event.");
 			})
 			.catch(err => next(err));
 	}

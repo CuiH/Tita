@@ -54,5 +54,38 @@ goalRoute.post('/check',
 	}
 );
 
+goalRoute.get('/date',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		let params = req.body;
+		params.user_id = req.user.id;
+		params.start_date = req.query.s;
+		params.end_date = req.query.e;
+		goalService.getAllGoalsByUserIdAndDate(params)
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried one day's goals.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+goalRoute.get('/sub',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		let params = req.body;
+		params.user_id = req.user.id;
+		params.goal_id = req.query.g;
+		goalService.getAllGoalsByUserIdAndGoalId(params)
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all sub goals.");
+			})
+			.catch(err => next(err));
+	}
+);
+
 
 module.exports = goalRoute;

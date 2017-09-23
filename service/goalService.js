@@ -71,6 +71,30 @@ const goalService = {
 				return {};
 			});
 	},
+
+	/* params = {user_id, start_date, end_date} */
+	/* results = {goals} */
+	getAllGoalsByUserIdAndDate: (params) => {
+		/*
+		 a) get all 'goal' by [user_id] and [start_time] and [end_time]
+		 */
+		return userGoalMapModel.findAllByUserIdAndDate(params)
+			.then((results) => {
+				return {goals: results};
+			});
+	},
+
+	/* params = {user_id, goal_id} */
+	/* results = {goals} */
+	getAllGoalsByUserIdAndGoalId: (params) => {
+		/*
+		 a) get all 'goal' by [user_id] and [goal_id]
+		 */
+		return userGoalMapModel.findAllByUserIdAndGoalId(params)
+			.then((results) => {
+				return {goals: results};
+			});
+	},
 };
 
 module.exports = goalService;

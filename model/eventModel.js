@@ -19,6 +19,33 @@ const eventModel = {
 			);
 		});
 	},
+
+	/* params = {id} */
+	findOneById: (params) => {
+		return new Promise((resolve, reject) => {
+			query(eventSql.selectOneById, [params.id],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
+	/* params = {user_id} */
+	findAllLikedByUserId: (params) => {
+		return new Promise((resolve, reject) => {
+			query(eventSql.selectAllLikedByUserId, [params.user_id],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
 };
 
 module.exports = eventModel;

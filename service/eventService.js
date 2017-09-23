@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const eventModel = require('../model/eventModel');
 const userEventMapModel = require('../model/userEventMapModel');
 const likingModel = require('../model/likingModel');
+const eventKeywordMapModel = require('../model/eventKeywordMapModel');
 
 const tokenValues = require('../config/token');
 
@@ -59,22 +60,15 @@ const eventService = {
 			});
 	},
 
-	/* params = {user_id} */
-	/* results = {events} */
-	getAllTodayEventsByUserId: (params) => {
+	/* params = {id} */
+	/* results = {event} */
+	getEventById: (params) => {
 		/*
-		 a) get all today 'event' by [user_id]
+		 a) get 'event' by [id]
 		 */
-		let start_date = new Date();
-		params.start_date = start_date.toLocaleString();
-
-		let end_date = new Date();
-		end_date.setDate(end_date.getDate() + 1);
-		params.end_date = end_date.toLocaleString();
-
-		return userEventMapModel.findAllByUserIdAndDate(params)
-			.then((results) => {
-				return {events: results};
+		return eventModel.findOneById(params)
+			.then((result) => {
+				return {event: result};
 			});
 	},
 
@@ -98,6 +92,30 @@ const eventService = {
 		 */
 		params.source = 'email';
 		return userEventMapModel.findAllFutureByUserIdAndSource(params)
+			.then((results) => {
+				return {events: results};
+			});
+	},
+
+	/* params = {user_id} */
+	/* results = {events} */
+	getAllLikedEventsByUserId: (params) => {
+		/*
+		 a) get all liked 'event' by [user_id]
+		 */
+		return eventModel.findAllLikedByUserId(params)
+			.then((results) => {
+				return {events: results};
+			});
+	},
+
+	/* params = {keyword_id} */
+	/* results = {events} */
+	getAllEventsByKeywordId: (params) => {
+		/*
+		 a) get all 'event' by [keyword_id]
+		 */
+		return eventKeywordMapModel.findAllPublicByKeyWordId(params)
 			.then((results) => {
 				return {events: results};
 			});
