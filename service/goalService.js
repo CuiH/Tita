@@ -27,9 +27,15 @@ const goalService = {
 					while (date.getDay() !== day)
 						date.setDate(date.getDate() + 1);
 
+					let startDate = new Date(date.toLocaleDateString());
+					let endDate = new Date(startDate);
+					endDate.setDate(endDate.getDate() + parseInt(params.duration));
+
 					promises.push(userGoalMapModel.create({
 						user_id: params.user_id,
-						goal_id: result.insertId
+						goal_id: result.insertId,
+						start_time: startDate.toISOString().slice(0, 19).replace('T', ' '),
+						end_time: endDate.toISOString().slice(0, 19).replace('T', ' ')
 					}));
 				}
 
@@ -40,27 +46,27 @@ const goalService = {
 			})
 	},
 
-	/* params = {user_id, goal_id} */
+	/* params = {user_id, ugm_id} */
 	/* results = {} */
 	shareGoal: (params) => {
 		/*
 		 a) share a 'goal'
 		 */
 		params.is_shared = "t";
-		return userGoalMapModel.updateSharedByUserIdAndGoalId(params)
+		return userGoalMapModel.updateSharedById(params)
 			.then((result) => {
 				return {};
 			});
 	},
 
-	/* params = {user_id, goal_id} */
+	/* params = {user_id, ugm_id} */
 	/* results = {} */
 	checkGoal: (params) => {
 		/*
 		 a) check a 'goal'
 		 */
 		params.is_checked = "t";
-		return userGoalMapModel.updateCheckedByUserIdAndGoalId(params)
+		return userGoalMapModel.updateCheckedById(params)
 			.then((result) => {
 				return {};
 			});

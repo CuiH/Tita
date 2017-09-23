@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const conf = require('../config/db');
 
+
 const pool = mysql.createPool(conf);
 
 const query = (sql, values, callback) => {
