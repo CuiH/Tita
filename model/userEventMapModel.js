@@ -31,6 +31,21 @@ const userEventMapModel = {
 		});
 	},
 
+	/* params = {user_id, type} */
+	findAllFutureByUserIdAndSource: (params) => {
+		console.log(params);
+		return new Promise((resolve, reject) => {
+			query(userEventMapSql.selectAllFutureByUserIdAndSource, [params.user_id,
+					params.source],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
 	/* params = {shared, user_id, event_id} */
 	updateSharedByUserIdAndEventId: (params) => {
 		return new Promise((resolve, reject) => {

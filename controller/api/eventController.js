@@ -80,17 +80,34 @@ eventRoute.get('/today',
 	}
 );
 
-eventRoute.get('/all',
+eventRoute.get('/date',
 	tokenAuthentication,
 	bodyParser.urlencoded({extended: false}),
 	(req, res, next) => {
 		let params = req.body;
 		params.user_id = req.user.id;
-		params.start_date = req.query.date;
+		params.start_date = req.query.s;
+		params.end_date = req.query.e;
 		eventService.getAllEventsByUserIdAndDate(params)
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a user queried one day's events.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+eventRoute.get('/source',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		let params = req.body;
+		params.user_id = req.user.id;
+		params.source = req.query.s;
+		eventService.getAllFutureEmailEventsByUserId(params)
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all future email events.");
 			})
 			.catch(err => next(err));
 	}

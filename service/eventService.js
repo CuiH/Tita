@@ -84,14 +84,20 @@ const eventService = {
 		/*
 		 a) get all 'event' by [user_id] and [start_time]
 		 */
-		let start_date = new Date(params.start_date);
-		params.start_date = start_date.toDateString();
-
-		let end_date = new Date(start_date);
-		end_date.setDate(end_date.getDate() + 1);
-		params.end_date = end_date.toDateString();
-
 		return userEventMapModel.findAllByUserIdAndDate(params)
+			.then((results) => {
+				return {events: results};
+			});
+	},
+
+	/* params = {user_id, start_date, end_date} */
+	/* results = {events} */
+	getAllFutureEmailEventsByUserId: (params) => {
+		/*
+		 a) get all 'event' by [user_id] and [source]
+		 */
+		params.source = 'email';
+		return userEventMapModel.findAllFutureByUserIdAndSource(params)
 			.then((results) => {
 				return {events: results};
 			});
