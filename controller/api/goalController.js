@@ -15,7 +15,7 @@ goalRoute.post('/create',
 	(req, res, next) => {
 		let params = req.body;
 		params.user_id = req.user.id;
-		goalService.createGoal(req.body)
+		goalService.createGoal(params)
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a new goal created.");
@@ -30,7 +30,7 @@ goalRoute.post('/share',
 	(req, res, next) => {
 		let params = req.body;
 		params.user_id = req.user.id;
-		goalService.shareGoal(req.body)
+		goalService.shareGoal(params)
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a user shared an goal.");
@@ -45,7 +45,7 @@ goalRoute.post('/check',
 	(req, res, next) => {
 		let params = req.body;
 		params.user_id = req.user.id;
-		goalService.checkGoal(req.body)
+		goalService.checkGoal(params)
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a user checked an event.");

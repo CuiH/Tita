@@ -8,7 +8,6 @@ const tokenAuthentication = require('../../middleware/tokenAuthentication');
 
 const eventRoute = express.Router();
 
-
 eventRoute.post('/create',
 	bodyParser.urlencoded({extended: false}),
 	(req, res, next) => {
@@ -27,7 +26,7 @@ eventRoute.post('/attend',
 	(req, res, next) => {
 		let params = req.body;
 		params.user_id = req.user.id;
-		eventService.attendEvent(req.body)
+		eventService.attendEvent(params)
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a user attended an event.");
@@ -42,7 +41,7 @@ eventRoute.post('/share',
 	(req, res, next) => {
 		let params = req.body;
 		params.user_id = req.user.id;
-		eventService.shareEvent(req.body)
+		eventService.shareEvent(params)
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a user shared an event.");
@@ -61,6 +60,37 @@ eventRoute.post('/like',
 			.then((results) => {
 				res.json({result: 'success', data: results});
 				console.log("a user liked an event.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+eventRoute.get('/today',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		let params = req.body;
+		params.user_id = req.user.id;
+		eventService.getAllTodayEventsByUserId(params)
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all today events.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+eventRoute.get('/all',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		let params = req.body;
+		params.user_id = req.user.id;
+		params.start_date = req.query.date;
+		eventService.getAllEventsByUserIdAndDate(params)
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried one day's events.");
 			})
 			.catch(err => next(err));
 	}

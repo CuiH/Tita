@@ -7,7 +7,7 @@ const value = require('../config/value');
 
 
 const goalService = {
-	/* params = {title, description, repeat_day, duration} */
+	/* params = {user_id, title, description, repeat_day, duration} */
 	/* results = {goalId} */
 	createGoal: (params) => {
 		/*
@@ -27,7 +27,7 @@ const goalService = {
 					while (date.getDay() !== day)
 						date.setDate(date.getDate() + 1);
 
-					let startDate = new Date(date.toLocaleDateString());
+					let startDate = new Date(date.toLocaleString());
 					let endDate = new Date(startDate);
 					endDate.setDate(endDate.getDate() + parseInt(params.duration));
 

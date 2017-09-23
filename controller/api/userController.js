@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 
 const userService = require('../../service/userService');
 
-const userRoute = express.Router();
 
+const userRoute = express.Router();
 
 userRoute.post('/register',
 	bodyParser.urlencoded({extended: false}),
