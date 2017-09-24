@@ -84,9 +84,9 @@ const eventService = {
 			});
 	},
 
-	/* params = {user_id, start_date, end_date} */
+	/* params = {user_id, source} */
 	/* results = {events} */
-	getAllFutureEmailEventsByUserId: (params) => {
+	getAllFutureEventsByUserId: (params) => {
 		/*
 		 a) get all 'event' by [user_id] and [source]
 		 */

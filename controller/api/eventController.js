@@ -89,10 +89,10 @@ eventRoute.get('/source',
 		let params = req.body;
 		params.user_id = req.user.id;
 		params.source = req.query.s;
-		eventService.getAllFutureEmailEventsByUserId(params)
+		eventService.getAllFutureEventsByUserId(params)
 			.then((results) => {
 				res.json({result: 'success', data: results});
-				console.log("a user queried all future email events.");
+				console.log("a user queried all future events.");
 			})
 			.catch(err => next(err));
 	}

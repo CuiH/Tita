@@ -31,8 +31,9 @@ const userEventMapModel = {
 		});
 	},
 
-	/* params = {user_id, type} */
+	/* params = {user_id, source} */
 	findAllFutureByUserIdAndSource: (params) => {
+		console.log(params);
 		return new Promise((resolve, reject) => {
 			query(userEventMapSql.selectAllFutureByUserIdAndSource, [params.user_id,
 					params.source],
