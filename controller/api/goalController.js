@@ -87,5 +87,18 @@ goalRoute.get('/sub',
 	}
 );
 
+goalRoute.get('/following',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		goalService.getAllGoalsByFollowerId({follower_id: req.user.id})
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all followee's goal.");
+			})
+			.catch(err => next(err));
+	}
+);
+
 
 module.exports = goalRoute;

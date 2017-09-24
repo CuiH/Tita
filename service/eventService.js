@@ -120,6 +120,18 @@ const eventService = {
 				return {events: results};
 			});
 	},
+
+	/* params = {follower_id} */
+	/* results = {events} */
+	getAllEventsByFollowerId: (params) => {
+		/*
+		 a) get all 'event' by [follower_id]
+		 */
+		return userEventMapModel.findAllByFollowerId(params)
+			.then((results) => {
+				return {events: results};
+			});
+	},
 };
 
 module.exports = eventService;

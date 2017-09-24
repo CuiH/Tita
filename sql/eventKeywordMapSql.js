@@ -4,5 +4,3 @@ const eventKeywordMap = {
 };
 
 module.exports = eventKeywordMap;
-
-

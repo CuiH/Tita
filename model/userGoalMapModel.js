@@ -46,6 +46,19 @@ const userGoalMapModel = {
 		});
 	},
 
+	/* params = {follower_id} */
+	findAllByFollowerId: (params) => {
+		return new Promise((resolve, reject) => {
+			query(userGoalMapSql.selectAllByFollowerId, [params.follower_id],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
 	/* params = {shared, ugm_id} */
 	updateSharedById: (params) => {
 		return new Promise((resolve, reject) => {

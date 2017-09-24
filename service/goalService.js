@@ -95,6 +95,18 @@ const goalService = {
 				return {goals: results};
 			});
 	},
+
+	/* params = {follower_id} */
+	/* results = {goals} */
+	getAllGoalsByFollowerId: (params) => {
+		/*
+		 a) get all 'goal' by [follower_id]
+		 */
+		return userGoalMapModel.findAllByFollowerId(params)
+			.then((results) => {
+				return {goals: results};
+			});
+	},
 };
 
 module.exports = goalService;

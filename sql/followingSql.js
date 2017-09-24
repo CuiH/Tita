@@ -1,5 +1,6 @@
 const following = {
-	insert: 'INSERT INTO following (followee_id, follower_id) VALUES (?, ?)'
+	insert: 'INSERT into following (follower_id, followee_id) ' +
+	        'VALUES (?, (select id from user where email = ?))'
 };
 
 module.exports = following;

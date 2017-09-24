@@ -20,7 +20,7 @@ const userModel = {
 	/* params = {email} */
 	findOneByEmail: (params) => {
 		return new Promise((resolve, reject) => {
-			query(userSql.selectOneByUsername, [params.email],
+			query(userSql.selectOneByEmail, [params.email],
 				(err, results, fields) => {
 					if (err) return reject(err);
 

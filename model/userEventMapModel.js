@@ -45,6 +45,19 @@ const userEventMapModel = {
 		});
 	},
 
+	/* params = {follower_id} */
+	findAllByFollowerId: (params) => {
+		return new Promise((resolve, reject) => {
+			query(userEventMapSql.selectAllByFollowerId, [params.follower_id],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
 	/* params = {shared, user_id, event_id} */
 	updateSharedByUserIdAndEventId: (params) => {
 		return new Promise((resolve, reject) => {

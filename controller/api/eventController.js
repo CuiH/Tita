@@ -125,9 +125,22 @@ eventRoute.get('/keyword',
 	}
 );
 
-eventRoute.get('/:id',
+eventRoute.get('/following',
+	tokenAuthentication,
 	bodyParser.urlencoded({extended: false}),
 	(req, res, next) => {
+		eventService.getAllEventsByFollowerId({follower_id: req.user.id})
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all followee's events.");
+			})
+			.catch(err => next(err));
+	}
+);
+
+eventRoute.get('/:id',
+	bodyParser.urlencoded({extended: false}),
+ 	(req, res, next) => {
 		eventService.getEventById({id: req.params.id})
 			.then((results) => {
 				res.json({result: 'success', data: results});

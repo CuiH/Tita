@@ -4,10 +4,10 @@ const followingSql = require('../sql/followingSql');
 
 
 const followingModel = {
-	/* params = {followee_id, follower_id} */
+	/* params = {follower_id, email} */
 	create: (params) => {
 		return new Promise((resolve, reject) => {
-			query(followingSql.insert, [params.followee_id, params.follower_id],
+			query(followingSql.insert, [params.follower_id, params.email],
 				(err, results, fields) => {
 					if (err) return reject(err);
 

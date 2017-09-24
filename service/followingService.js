@@ -2,7 +2,7 @@ const followingModel = require('../model/followingModel');
 
 
 const followingService = {
-	/* params = {followee_id, follower_id} */
+	/* params = {follower_id, email} */
 	/* results = {} */
 	follow: (params) => {
 		/*
