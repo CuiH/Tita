@@ -107,6 +107,18 @@ const goalService = {
 				return {goals: results};
 			});
 	},
+
+	/* params = {user_id} */
+	/* results = {goals} */
+	getAllGoalsByUserId: (params) => {
+		/*
+		 a) get all 'goal' by [user_id]
+		 */
+		return goalModel.findAllByUserId(params)
+			.then((results) => {
+				return {goals: results};
+			});
+	},
 };
 
 module.exports = goalService;

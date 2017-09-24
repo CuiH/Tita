@@ -17,6 +17,19 @@ const goalModel = {
 			);
 		});
 	},
+
+	/* params = {user_id} */
+	findAllByUserId: (params) => {
+		return new Promise((resolve, reject) => {
+			query(goalSql.selectAllByUserId, [params.user_id],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
 };
 
 module.exports = goalModel;

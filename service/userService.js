@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const userModel = require('../model/userModel');
+const userEmailModel = require('../model/userEmailModel');
 
 const tokenValues = require('../config/token');
 
@@ -45,7 +46,19 @@ const userService = {
 
 				return {id: userId, username: params.username, token: token};
 			});
-	}
+	},
+
+	/* params = {user_id, email, pwd} */
+	/* results = {} */
+	addEmail: (params) => {
+		/*
+		 a) add a 'user_email'
+		 */
+		return userEmailModel.insert(params)
+			.then((result) => {
+				return {};
+			});
+	},
 };
 
 module.exports = userService;

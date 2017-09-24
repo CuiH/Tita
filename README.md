@@ -187,6 +187,31 @@ response:
 }
 ```
 
+### get all goals
+url: /api/goal/all GET (requires token)
+
+response:
+
+```
+{
+    "result": "success",
+    "data": {
+        "goals": [
+            {
+                "id": 32,
+                "title": "goal_test8711",
+                "location": null,
+                "description": "this is a goal description   ",
+                "repeat_day": "MUF",
+                "start_time": "10:22:22 ",
+                "end_time": "15:23:33",
+                "user_id": 1
+            }
+        ]
+    }
+}
+```
+
 ## event
 ### create
 url: /api/event/create POST

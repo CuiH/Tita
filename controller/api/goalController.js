@@ -100,5 +100,18 @@ goalRoute.get('/following',
 	}
 );
 
+goalRoute.get('/all',
+	tokenAuthentication,
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		goalService.getAllGoalsByUserId({user_id: req.user.id})
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all goals.");
+			})
+			.catch(err => next(err));
+	}
+);
+
 
 module.exports = goalRoute;
