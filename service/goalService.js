@@ -27,9 +27,10 @@ const goalService = {
 					while (date.getDay() !== day)
 						date.setDate(date.getDate() + 1);
 
-					let prefix = date.toLocaleString().slice(0, 11);
-					let startDate = new Date(prefix + params.start_time);
-					let endDate = new Date(prefix + params.end_time);
+					let prefix = date.getFullYear() + "-" +
+						(date.getMonth() + 1) + "-" + date.getDate() + " ";
+					let startDate = prefix + params.start_time;
+					let endDate = prefix + params.end_time;
 
 					promises.push(userGoalMapModel.create({
 						user_id: params.user_id,

@@ -84,6 +84,18 @@ const eventService = {
 			});
 	},
 
+	/* params = {} */
+	/* results = {events} */
+	getAllEvents: (params) => {
+		/*
+		 a) get all 'event'
+		 */
+		return eventModel.findAll(params)
+			.then((results) => {
+				return {events: results};
+			});
+	},
+
 	/* params = {user_id, source} */
 	/* results = {events} */
 	getAllFutureEventsByUserId: (params) => {

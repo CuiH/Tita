@@ -138,6 +138,18 @@ eventRoute.get('/following',
 	}
 );
 
+eventRoute.get('/all',
+	bodyParser.urlencoded({extended: false}),
+	(req, res, next) => {
+		eventService.getAllEvents({})
+			.then((results) => {
+				res.json({result: 'success', data: results});
+				console.log("a user queried all events.");
+			})
+			.catch(err => next(err));
+	}
+);
+
 eventRoute.get('/:id',
 	bodyParser.urlencoded({extended: false}),
  	(req, res, next) => {

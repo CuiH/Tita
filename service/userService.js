@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+const exec = require('child_process').exec;
+
 const userModel = require('../model/userModel');
 const userEmailModel = require('../model/userEmailModel');
 

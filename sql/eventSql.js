@@ -6,6 +6,7 @@ const event = {
 	selectOneById: 'SELECT * FROM event WHERE id = ?',
 	selectAllLikedByUserId: 'SELECT e.* FROM event e, liking l WHERE l.user_id = ? ' +
 	                                        'AND l.event_id = e.id',
+	selectAll: 'SELECT * FROM event WHERE id > 0'
 };
 
 module.exports = event;

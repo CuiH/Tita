@@ -46,6 +46,19 @@ const eventModel = {
 		});
 	},
 
+	/* params = {} */
+	findAll: (params) => {
+		return new Promise((resolve, reject) => {
+			query(eventSql.selectAll, [],
+				(err, results, fields) => {
+					if (err) return reject(err);
+
+					resolve(results);
+				}
+			);
+		});
+	},
+
 };
 
 module.exports = eventModel;
