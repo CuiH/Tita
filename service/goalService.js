@@ -7,7 +7,7 @@ const value = require('../config/value');
 
 
 const goalService = {
-	/* params = {user_id, title, description, repeat_day, duration} */
+	/* params = {user_id, title, location, description, repeat_day, start_time, end_time} */
 	/* results = {goalId} */
 	createGoal: (params) => {
 		/*
@@ -27,15 +27,15 @@ const goalService = {
 					while (date.getDay() !== day)
 						date.setDate(date.getDate() + 1);
 
-					let startDate = new Date(date.toLocaleString());
-					let endDate = new Date(startDate);
-					endDate.setDate(endDate.getDate() + parseInt(params.duration));
+					let prefix = date.toLocaleString().slice(0, 11);
+					let startDate = new Date(prefix + params.start_time);
+					let endDate = new Date(prefix + params.end_time);
 
 					promises.push(userGoalMapModel.create({
 						user_id: params.user_id,
 						goal_id: result.insertId,
-						start_time: startDate.toISOString().slice(0, 19).replace('T', ' '),
-						end_time: endDate.toISOString().slice(0, 19).replace('T', ' ')
+						start_time: startDate.toLocaleString(),
+						end_time: endDate.toLocaleString()
 					}));
 				}
 
