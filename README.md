@@ -22,7 +22,9 @@ header: x-access-token = token
 ## user
 ### register
 url: /api/user/register POST
+
 body: `email`=?&`password`=?&`username`=?
+
 response:
 
 ```
@@ -36,7 +38,9 @@ response:
 
 ### log_in
 url: /api/user/log_in POST
+
 body: `email`=?&`password`=?
+
 response:
 
 ```
@@ -52,7 +56,9 @@ response:
 ## following
 ### follow
 url: /api/following/follow POST (requires token)
+
 body: `email`=?
+
 response:
 
 ```
@@ -65,7 +71,9 @@ response:
 ## goal
 ### create
 url: /api/goal/create POST (requires token)
+
 body: `title`=?&`description`=?&`repeat_day`=?&`duration`=? (repeat_day: MTWUFAN)
+
 response:
 
 ```
@@ -79,7 +87,9 @@ response:
 
 ### check
 url: /api/goal/check POST (requires token)
+
 body: `ugm_id`=?
+
 response:
 
 ```
@@ -91,7 +101,9 @@ response:
 
 ### share
 url: /api/goal/share POST (requires token)
+
 body: `ugm_id`=?
+
 response:
 
 ```
@@ -103,6 +115,7 @@ response:
 
 ### get all goals between two dates
 url: /api/goal/date?`s`=X&`e`=X GET (requires token)
+
 response:
 
 ```
@@ -127,6 +140,7 @@ response:
 
 ### get all sub goals
 url: /api/goal/sub?`g`=X GET (requires token)
+
 response:
 
 ```
@@ -152,6 +166,7 @@ response:
 
 ### get all followees' goals
 url: /api/goal/following GET (requires token)
+
 response:
 
 ```
@@ -175,6 +190,7 @@ response:
 ## event
 ### create
 url: /api/event/create POST
+
 body: `title`=?`&start_time`=?&`end_time`=?&`location`=?&`description`=?&`image_url`=?&`doc_link`=?&`homepage_link`=?&`type`=?
 
 response:
@@ -190,7 +206,9 @@ response:
 
 ### attend
 url: /api/event/attend POST (requires token)
+
 body: `event_id`=?
+
 response:
 
 ```
@@ -202,6 +220,7 @@ response:
 
 ### share
 url: /api/event/share POST (requires token)
+
 body: `event_id`=?
 
 ```
@@ -213,6 +232,7 @@ body: `event_id`=?
 
 ### like
 url: /api/event/like POST (requires token)
+
 body: `event_id`=?
 
 ```
@@ -224,6 +244,7 @@ body: `event_id`=?
 
 ### get all events between two dates
 url: /api/event/date?`s`=X&`e`=X GET (requires token)
+
 response:
 
 ```
@@ -248,6 +269,7 @@ response:
 
 ### get all future events generated from one source (such as email)
 url: /api/event/source?`s`=X GET (requires token)
+
 response:
 
 ```
@@ -275,6 +297,7 @@ response:
 
 ### get all liked events
 url: /api/event/liked GET (requires token)
+
 response:
 
 ```
@@ -302,6 +325,7 @@ response:
 
 ### get event by id
 url: /api/event/X GET
+
 response:
 
 ```
@@ -329,6 +353,7 @@ response:
 
 ### get events by keyword (id)
 url: /api/event/keyword?`k`=X GET
+
 response:
 
 ```
@@ -356,6 +381,7 @@ response:
 
 ### get all followee's events
 url: /api/event/following GET (requires token)
+
 response:
 
 ```
